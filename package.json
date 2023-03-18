@@ -1,0 +1,30 @@
+{
+  "name": "pcat",
+  "version": "1.0.0",
+  "description": "photo app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/emekcan99/PCAT.git"
+  },
+  "keywords": [
+    "photo",
+    "camera"
+  ],
+  "author": "emekcan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/emekcan99/PCAT/issues"
+  },
+  "homepage": "https://github.com/emekcan99/PCAT#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.21"
+  }
+}
