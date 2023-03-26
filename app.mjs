@@ -35,6 +35,15 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 
+app.get("/photos/:id", (req, res) => {
+  //console.log(req.params.id)
+  const photo = Photo.findById(req.params.id);
+
+  res.render("photo", {
+    photo,
+  });
+});
+
 app.use(express.static("public"));
 
 app.get("/add", (req, res) => {
