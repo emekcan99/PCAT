@@ -34,11 +34,27 @@ const postPhoto = async (req, res) => {
 };
 
 const getAllPhotos = async (req, res) => {
-  const photos = await Photo.find({}).sort("-dateCreated");
+  const page = req.query.page || 1;
+  const photosPerPage = 3;
 
+  const totalPhotos = await Photo.find().countDocuments();
+
+  const photos = await Photo.find({})
+    .sort("-dateCreated")
+    .skip((page - 1) * photosPerPage)
+    .limit(photosPerPage);
+
+    res.render('index',{
+      photos: photos,
+      current:page,
+      pages: Math.ceil(totalPhotos /photosPerPage)
+    })
+
+  /*const photos = await Photo.find({}).sort("-dateCreated");
   res.render("index", {
     photos: photos,
   });
+*/
 };
 
 const updatePhoto = async (req, res) => {
@@ -52,13 +68,10 @@ const updatePhoto = async (req, res) => {
   res.redirect(`/photos/${req.params.id}`);
 };
 
-
-
-
 const deletePhoto = async (req, res) => {
   const photo = await Photo.findOne({ _id: req.params.id });
 
-  let deletedImage = __dirname + '/public' + photo.image;
+  let deletedImage = __dirname + "/public" + photo.image;
 
   fs.unlinkSync(deletedImage);
 
